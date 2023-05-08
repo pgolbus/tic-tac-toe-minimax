@@ -1,32 +1,16 @@
-def evaluate(state):
-    """
-    Function to heuristic evaluation of state.
-    :param state: the state of the current board
-    :return: +1 if the computer wins; -1 if the human wins; 0 draw
-    """
-    if wins(state, COMP):
-        score = +1
-    elif wins(state, HUMAN):
-        score = -1
-    else:
-        score = 0
-
-    return score
-
-
 def minimax(state, depth, player):
     """
     AI function that choice the best move
     :param state: current state of the board
-    :param moves_remaining:  number of moves remaining before it must be a draw
+    :param depth: node index in the tree (0 <= depth <= 9),
+    but never nine in this case (see iaturn() function)
     :param player: an human or a computer
     :return: a list with [the best row, best col, best score]
     """
-    # [row, col, win / loss]
     if player == COMP:
-        best = [_, _, -infinity]
+        best = [-1, -1, -infinity]
     else:
-        best = [_, _, +infinity]
+        best = [-1, -1, +infinity]
 
     if depth == 0 or game_over(state):
         score = evaluate(state)
